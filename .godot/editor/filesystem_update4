@@ -1,1 +1,5 @@
 res://main.tscn
+res://enemy/enemy.gd
+res://player/player.gd
+res://main.gd
+res://canvas_layer.gd

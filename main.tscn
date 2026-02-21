@@ -1,9 +1,10 @@
-[gd_scene format=4 uid="uid://bb4tw5tomlq36"]
+[gd_scene format=4 uid="uid://comg271og62ie"]
 
 [ext_resource type="Texture2D" uid="uid://dx52ooy4d5y2g" path="res://tiles.jpg" id="1_h2yge"]
 [ext_resource type="Script" uid="uid://b7w2k0dohjkxy" path="res://player/player.gd" id="2_1bvp3"]
 [ext_resource type="Texture2D" uid="uid://1fws8o4floge" path="res://icon.svg" id="3_lquwl"]
 [ext_resource type="Script" uid="uid://mqoxrbcra2vo" path="res://enemy/enemy.gd" id="4_1bvp3"]
+[ext_resource type="Script" uid="uid://crwscbp8txk2m" path="res://canvas_layer.gd" id="5_lquwl"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7mycd"]
 texture = ExtResource("1_h2yge")
@@ -27,7 +28,7 @@ size = Vector2(128, 128)
 size = Vector2(128, 128)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1bvp3"]
-size = Vector2(128, 128)
+size = Vector2(165, 146)
 
 [node name="Main" type="Node2D" unique_id=21220203]
 
@@ -36,18 +37,17 @@ tile_map_data = PackedByteArray("AAAAAAgAAQABAAAAAAABAAgAAQABAAAAAAACAAgAAQABAAA
 tile_set = SubResource("TileSet_272bh")
 
 [node name="Player" type="CharacterBody2D" parent="." unique_id=1321949153 groups=["player"]]
-position = Vector2(93, 116)
+position = Vector2(130, 296)
 script = ExtResource("2_1bvp3")
+
+[node name="Camera2D" type="Camera2D" parent="Player" unique_id=72165096]
+position = Vector2(444, 32)
 
 [node name="Sprite2D" type="Sprite2D" parent="Player" unique_id=1062851095]
 texture = ExtResource("3_lquwl")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player" unique_id=193119598]
-visible = false
 shape = SubResource("RectangleShape2D_5vw27")
-
-[node name="Camera2D" type="Camera2D" parent="Player" unique_id=72165096]
-visible = false
 
 [node name="Enemy" type="CharacterBody2D" parent="." unique_id=346885894]
 position = Vector2(1033, 128)
@@ -65,7 +65,25 @@ shape = SubResource("RectangleShape2D_lquwl")
 [node name="AttackArea" type="Area2D" parent="Enemy" unique_id=936009589]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy/AttackArea" unique_id=1350949124]
-visible = false
+position = Vector2(0.5, -8)
 shape = SubResource("RectangleShape2D_1bvp3")
 
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1941058608]
+script = ExtResource("5_lquwl")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="CanvasLayer" unique_id=307653457]
+offset_left = 26.0
+offset_top = 23.0
+offset_right = 473.0
+offset_bottom = 57.0
+value = 100.0
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/TextureProgressBar" unique_id=2029925942]
+layout_mode = 0
+offset_right = 447.0
+offset_bottom = 34.0
+color = Color(1, 0, 0, 1)
+
+[connection signal="damaged" from="Player" to="CanvasLayer" method="_on_player_damaged"]
+[connection signal="health_changed" from="Player" to="CanvasLayer" method="_on_player_health_changed"]
 [connection signal="body_entered" from="Enemy/AttackArea" to="Enemy" method="_on_attack_area_body_entered"]

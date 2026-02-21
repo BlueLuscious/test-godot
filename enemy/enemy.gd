@@ -17,7 +17,7 @@ func _physics_process(delta):
 		
 	move_and_slide()
 
-func _on_attack_area_body_entered(body):
+func _on_attack_area_body_entered(body: CharacterBody2D):
 	if body.is_in_group("player"):
 		print("Estoy atacando al jugador")
 		player = body
