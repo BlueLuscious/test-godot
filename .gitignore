@@ -1,0 +1,11 @@
+# Godot 4+
+.import/
+.export/
+export.cfg
+export_presets.cfg
+
+# Mono (si no usas C# podes dejar igual)
+.mono/
+
+# Archivos temporales
+*.tmp

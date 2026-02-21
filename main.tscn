@@ -1,0 +1,71 @@
+[gd_scene format=4 uid="uid://bb4tw5tomlq36"]
+
+[ext_resource type="Texture2D" uid="uid://dx52ooy4d5y2g" path="res://tiles.jpg" id="1_h2yge"]
+[ext_resource type="Script" uid="uid://b7w2k0dohjkxy" path="res://player/player.gd" id="2_1bvp3"]
+[ext_resource type="Texture2D" uid="uid://1fws8o4floge" path="res://icon.svg" id="3_lquwl"]
+[ext_resource type="Script" uid="uid://mqoxrbcra2vo" path="res://enemy/enemy.gd" id="4_1bvp3"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7mycd"]
+texture = ExtResource("1_h2yge")
+margins = Vector2i(27, 32)
+texture_region_size = Vector2i(56, 56)
+1:0/0 = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-28, 28, 28, 28, 28, -20.32106, -28, -21.450008)
+
+[sub_resource type="TileSet" id="TileSet_272bh"]
+tile_size = Vector2i(56, 56)
+physics_layer_0/collision_layer = 1
+physics_layer_0/collision_mask = 0
+physics_layer_1/collision_layer = 2
+physics_layer_1/collision_mask = 0
+sources/1 = SubResource("TileSetAtlasSource_7mycd")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5vw27"]
+size = Vector2(128, 128)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lquwl"]
+size = Vector2(128, 128)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1bvp3"]
+size = Vector2(128, 128)
+
+[node name="Main" type="Node2D" unique_id=21220203]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=701054871]
+tile_map_data = PackedByteArray("AAAAAAgAAQABAAAAAAABAAgAAQABAAAAAAACAAgAAQABAAAAAAADAAgAAQABAAAAAAAEAAgAAQABAAAAAAAFAAgAAQABAAAAAAAGAAgAAQABAAAAAAAHAAgAAQABAAAAAAAIAAgAAQABAAAAAAAJAAgAAQABAAAAAAAJAAcAAQABAAAAAAAKAAcAAQABAAAAAAALAAcAAQABAAAAAAAPAAYAAQABAAAAAAAQAAYAAQABAAAAAAARAAYAAQABAAAAAAASAAYAAQABAAAAAAATAAYAAQABAAAAAAAUAAYAAQABAAAAAAAVAAYAAQABAAAAAAAWAAYAAQABAAAAAAAXAAcAAQABAAAAAAAWAAcAAQABAAAAAAAYAAgAAQABAAAAAAAXAAgAAQABAAAAAAAZAAgAAQABAAAAAAAdAAgAAQABAAAAAAAeAAgAAQABAAAAAAAfAAgAAQABAAAAAAAgAAcAAQABAAAAAAAgAAgAAQABAAAAAAAhAAcAAQABAAAAAAAhAAYAAQABAAAAAAAiAAYAAQABAAAAAAAiAAUAAQABAAAAAAAjAAUAAQABAAAAAAAkAAUAAQABAAAAAAAlAAUAAQABAAAAAAA=")
+tile_set = SubResource("TileSet_272bh")
+
+[node name="Player" type="CharacterBody2D" parent="." unique_id=1321949153 groups=["player"]]
+position = Vector2(93, 116)
+script = ExtResource("2_1bvp3")
+
+[node name="Sprite2D" type="Sprite2D" parent="Player" unique_id=1062851095]
+texture = ExtResource("3_lquwl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player" unique_id=193119598]
+visible = false
+shape = SubResource("RectangleShape2D_5vw27")
+
+[node name="Camera2D" type="Camera2D" parent="Player" unique_id=72165096]
+visible = false
+
+[node name="Enemy" type="CharacterBody2D" parent="." unique_id=346885894]
+position = Vector2(1033, 128)
+collision_layer = 2
+script = ExtResource("4_1bvp3")
+
+[node name="Sprite2D" type="Sprite2D" parent="Enemy" unique_id=983756611]
+modulate = Color(0.9137255, 0, 0, 1)
+texture = ExtResource("3_lquwl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy" unique_id=297661513]
+visible = false
+shape = SubResource("RectangleShape2D_lquwl")
+
+[node name="AttackArea" type="Area2D" parent="Enemy" unique_id=936009589]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy/AttackArea" unique_id=1350949124]
+visible = false
+shape = SubResource("RectangleShape2D_1bvp3")
+
+[connection signal="body_entered" from="Enemy/AttackArea" to="Enemy" method="_on_attack_area_body_entered"]

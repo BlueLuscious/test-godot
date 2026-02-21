@@ -1,0 +1,9 @@
+63f7b34db8d8cdea90c76aacccf841ec
+::res://::1771695033
+icon.svg::CompressedTexture2D::1836601497712865488::1771683640::1771683645::1::::<><><>0<>0<>d0fb9ee814a5327e7b42195190842c46<>res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex::
+main.tscn::PackedScene::2517670998231709487::1771694407::0::1::::<><><>0<>0<><>::uid://dx52ooy4d5y2g::::res://tiles.jpg<>uid://b7w2k0dohjkxy::::res://player/player.gd<>uid://1fws8o4floge::::res://icon.svg<>uid://mqoxrbcra2vo::::res://enemy/enemy.gd
+tiles.jpg::CompressedTexture2D::8837201921020256444::1771684808::1771684599::1::::<><><>0<>0<>dfe1aa392dfe5c2d081b4355b40876ba<>res://.godot/imported/tiles.jpg-c481a474c752f3b5b2ff7caadcadd0bd.ctex::
+::res://enemy/::1771689308
+enemy.gd::GDScript::876188173435265492::1771689308::0::1::::<>CharacterBody2D<><>0<>0<><>::
+::res://player/::1771694967
+player.gd::GDScript::4679538525807179142::1771689607::0::1::::<>CharacterBody2D<><>0<>0<><>::
